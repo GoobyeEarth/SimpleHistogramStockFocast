@@ -3,15 +3,16 @@ package every_daily_data_stock_forcast;
 import java.util.ArrayList;
 import java.util.List;
 
+import library.OneDayDataClass;
 import library.SystemVariableInterface;
 
-public class LearningDayDataClass implements SystemVariableInterface {
+public class LearningOneDayDataClass implements SystemVariableInterface {
 
 	private List<OneDayDataClass>[] pointer = new List[NUM_OF_VARIABLES_IN_DALIY_DATA];
 	private double[] unit = new double[NUM_OF_VARIABLES_IN_DALIY_DATA];
 	private static final int DATA_NUM = 20;
 
-	public LearningDayDataClass() {
+	public LearningOneDayDataClass() {
 		for (int i = 0; i < pointer.length; i++) {
 			pointer[i] = new ArrayList<OneDayDataClass>();
 		}

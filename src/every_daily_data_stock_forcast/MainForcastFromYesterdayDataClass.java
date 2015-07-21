@@ -3,6 +3,7 @@ package every_daily_data_stock_forcast;
 import java.util.List;
 
 import library.LogCsvClass;
+import library.OneDayDataClass;
 import library.SQLiteRowStockDataDaoClass;
 import library.StockCandleClass;
 import library.SystemVariableInterface;
@@ -56,7 +57,7 @@ public class MainForcastFromYesterdayDataClass implements
 		}
 		
 		
-		LearningDayDataClass x = new LearningDayDataClass();
+		LearningOneDayDataClass x = new LearningOneDayDataClass();
 		LogCsvClass log = new LogCsvClass("1");
 		log.set(new String[]{
 				"open", 

@@ -11,5 +11,8 @@ public interface SystemVariableInterface {
 	public static final String TURNOVER_PRICE = "turnover_price";
 	
 	public static final int NUM_OF_VARIABLES_IN_DALIY_DATA = 5;
+	
+	public static final int NUM_OF_DAY_IN_STOCK_DATA = 5;
+	
 
 }

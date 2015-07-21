@@ -1,6 +1,5 @@
-package every_daily_data_stock_forcast;
+package library;
 
-import library.SystemVariableInterface;
 
 public class OneDayDataClass implements SystemVariableInterface{
 	public float[] preMR;
