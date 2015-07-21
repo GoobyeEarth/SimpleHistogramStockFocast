@@ -2,7 +2,7 @@ package every_daily_data_stock_forcast;
 
 import library.SystemVariableInterface;
 
-public class StockLearningDataClass implements SystemVariableInterface{
+public class OneDayDataClass implements SystemVariableInterface{
 	public float[] preMR;
 
 	public static final int OPENING = 0;
@@ -15,7 +15,7 @@ public class StockLearningDataClass implements SystemVariableInterface{
 	public boolean inDist = true;
 	
 	public int distance = 0;
-	public StockLearningDataClass(){
+	public OneDayDataClass(){
 		preMR = new float[NUM_OF_VARIABLES_IN_DALIY_DATA];
 	}
 	

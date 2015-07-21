@@ -1,4 +1,4 @@
-package every_daily_data_stock_forcast;
+package library;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.List;
-
-import library.SystemVariableInterface;
 
 public class LogCsvClass implements SystemVariableInterface{
 

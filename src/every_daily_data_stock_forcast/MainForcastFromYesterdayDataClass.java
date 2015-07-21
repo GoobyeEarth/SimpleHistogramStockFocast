@@ -2,6 +2,7 @@ package every_daily_data_stock_forcast;
 
 import java.util.List;
 
+import library.LogCsvClass;
 import library.SQLiteRowStockDataDaoClass;
 import library.StockCandleClass;
 import library.SystemVariableInterface;
@@ -23,27 +24,27 @@ public class MainForcastFromYesterdayDataClass implements
 		SQLiteRowStockDataDaoClass srsDao = new SQLiteRowStockDataDaoClass();
 		List<StockCandleClass> candleList = srsDao.findBySymbol("1301");
 
-		StockLearningDataClass[] stockMoving = new StockLearningDataClass[candleList.size() - 2];
+		OneDayDataClass[] stockMoving = new OneDayDataClass[candleList.size() - 2];
 		
 		for (int i = 0; i < stockMoving.length; i++) {
-			stockMoving[i] = new StockLearningDataClass();
-			stockMoving[i].preMR[StockLearningDataClass.OPENING]= (float) 100
+			stockMoving[i] = new OneDayDataClass();
+			stockMoving[i].preMR[OneDayDataClass.OPENING]= (float) 100
 					* (candleList.get(i + 1).opening - candleList.get(i).closing)
 					/ candleList.get(i).closing;
 			
-			stockMoving[i].preMR[StockLearningDataClass.LOW] = (float) 100
+			stockMoving[i].preMR[OneDayDataClass.LOW] = (float) 100
 					* (candleList.get(i + 1).low - candleList.get(i).closing)
 					/ candleList.get(i).closing;
 			
-			stockMoving[i].preMR[StockLearningDataClass.HIGH] = (float) 100
+			stockMoving[i].preMR[OneDayDataClass.HIGH] = (float) 100
 					* (candleList.get(i + 1).high - candleList.get(i).closing)
 					/ candleList.get(i).closing;
 			
-			stockMoving[i].preMR[StockLearningDataClass.CLOSING] = (float) 100
+			stockMoving[i].preMR[OneDayDataClass.CLOSING] = (float) 100
 					* (candleList.get(i + 1).closing - candleList.get(i).closing)
 					/ candleList.get(i).closing;
 			
-			stockMoving[i].preMR[StockLearningDataClass.TRADING_VOLUME] = (float) 100
+			stockMoving[i].preMR[OneDayDataClass.TRADING_VOLUME] = (float) 100
 					* (candleList.get(i + 1).getTradingVolume() - candleList.get(i).getTradingVolume())
 					/ candleList.get(i).getTradingVolume();
 			
@@ -55,7 +56,7 @@ public class MainForcastFromYesterdayDataClass implements
 		}
 		
 		
-		AbstractStockLearningClass2 x = new AbstractStockLearningClass2();
+		LearningDayDataClass x = new LearningDayDataClass();
 		LogCsvClass log = new LogCsvClass("1");
 		log.set(new String[]{
 				"open", 
@@ -82,7 +83,7 @@ public class MainForcastFromYesterdayDataClass implements
 			
 			if(i > 30){
 				
-				CalcedResultClass result = x.getCalcResult(stockMoving[i+1].preMR);
+				OneDayResultClass result = x.getCalcResult(stockMoving[i+1].preMR);
 				
 				float profit = 0;
 				final float test = 0;

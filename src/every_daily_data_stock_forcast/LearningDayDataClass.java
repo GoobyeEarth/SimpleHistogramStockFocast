@@ -5,19 +5,19 @@ import java.util.List;
 
 import library.SystemVariableInterface;
 
-public class AbstractStockLearningClass2 implements SystemVariableInterface {
+public class LearningDayDataClass implements SystemVariableInterface {
 
-	private List<StockLearningDataClass>[] pointer = new List[NUM_OF_VARIABLES_IN_DALIY_DATA];
+	private List<OneDayDataClass>[] pointer = new List[NUM_OF_VARIABLES_IN_DALIY_DATA];
 	private double[] unit = new double[NUM_OF_VARIABLES_IN_DALIY_DATA];
 	private static final int DATA_NUM = 20;
 
-	public AbstractStockLearningClass2() {
+	public LearningDayDataClass() {
 		for (int i = 0; i < pointer.length; i++) {
-			pointer[i] = new ArrayList<StockLearningDataClass>();
+			pointer[i] = new ArrayList<OneDayDataClass>();
 		}
 	}
 
-	public void learn(StockLearningDataClass stockData) {
+	public void learn(OneDayDataClass stockData) {
 
 		for (int i = 0; i < pointer.length; i++) {
 			DataPlacerClass placer = new DataPlacerClass(pointer[i], i);
@@ -27,7 +27,7 @@ public class AbstractStockLearningClass2 implements SystemVariableInterface {
 
 	}
 
-	public CalcedResultClass getCalcResult(float[] priceMovements) {
+	public OneDayResultClass getCalcResult(float[] priceMovements) {
 
 		DataPlacerClass dataResetter = new DataPlacerClass(pointer[0], 0);
 		dataResetter.resetDist();
@@ -41,7 +41,7 @@ public class AbstractStockLearningClass2 implements SystemVariableInterface {
 		int influenceDist = getinfluenceDist(priceMovements);
 
 		double wSum = 0;
-		CalcedResultClass result = new CalcedResultClass();
+		OneDayResultClass result = new OneDayResultClass();
 
 		for (int i = 0; i < pointer[0].size(); i++) {
 
@@ -94,9 +94,9 @@ public class AbstractStockLearningClass2 implements SystemVariableInterface {
 
 	private class DataPlacerClass {
 		private int MRindex;
-		private List<StockLearningDataClass> pointer;
+		private List<OneDayDataClass> pointer;
 
-		public DataPlacerClass(List<StockLearningDataClass> pointer, int MRindex) {
+		public DataPlacerClass(List<OneDayDataClass> pointer, int MRindex) {
 			this.pointer = pointer;
 			this.MRindex = MRindex;
 
@@ -137,7 +137,7 @@ public class AbstractStockLearningClass2 implements SystemVariableInterface {
 
 		}
 
-		public int getDataPlace(StockLearningDataClass insertingData) {
+		public int getDataPlace(OneDayDataClass insertingData) {
 			switch (pointer.size()) {
 			case 0:
 				return 0;
@@ -172,7 +172,7 @@ public class AbstractStockLearningClass2 implements SystemVariableInterface {
 			return 1;
 		}
 
-		public int getExpectedDataPlace(StockLearningDataClass insertingData,
+		public int getExpectedDataPlace(OneDayDataClass insertingData,
 				float first, float last) {
 			float d = last - first;
 			float h = (float) (pointer.size() * 2) / d;
@@ -200,7 +200,7 @@ public class AbstractStockLearningClass2 implements SystemVariableInterface {
 		}
 
 		public int calcDataPlaceFromEp(int ep,
-				StockLearningDataClass insertingData) {
+				OneDayDataClass insertingData) {
 			switch (pointer.size()) {
 			case 0:
 				return 0;

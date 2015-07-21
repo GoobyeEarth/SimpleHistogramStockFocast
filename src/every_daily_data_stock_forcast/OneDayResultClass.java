@@ -1,6 +1,6 @@
 package every_daily_data_stock_forcast;
 
-public class CalcedResultClass {
+public class OneDayResultClass {
 
 	public double mean;
 	public double std;
@@ -9,7 +9,7 @@ public class CalcedResultClass {
 	public int influenceDist;
 	public double unit[];
 
-	public CalcedResultClass(){
+	public OneDayResultClass(){
 		mean = 0;
 		std = 0;
 		n = 0;
