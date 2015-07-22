@@ -1,7 +1,5 @@
-package five_day_stock_forcast;
+package library;
 
-import library.OneDayDataClass;
-import library.SystemVariableInterface;
 
 public class FiveDayDataClass implements SystemVariableInterface{
 	public OneDayDataClass[] dailyData = new OneDayDataClass[NUM_OF_DAY_IN_STOCK_DATA];

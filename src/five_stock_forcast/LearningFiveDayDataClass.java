@@ -1,4 +1,4 @@
-package five_day_stock_forcast;
+package five_stock_forcast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class LearningFiveDayDataClass implements SystemVariableInterface {
 
 	}
 
-	public FiveDayResultClass getCalcResult(FiveDayDataClass priceMovements) {
+	public FiveStockResultClass getCalcResult(FiveDayDataClass priceMovements) {
 		DataPlacerClass dataResetter = new DataPlacerClass(pointer[0][0], new int[]{0,0});
 		dataResetter.resetDist();
 
@@ -52,7 +52,7 @@ public class LearningFiveDayDataClass implements SystemVariableInterface {
 		int influenceDist = getinfluenceDist();
 
 		double wSum = 0;
-		FiveDayResultClass result = new FiveDayResultClass();
+		FiveStockResultClass result = new FiveStockResultClass();
 
 		for (int i = 0; i < pointer[0][0].size(); i++) {
 

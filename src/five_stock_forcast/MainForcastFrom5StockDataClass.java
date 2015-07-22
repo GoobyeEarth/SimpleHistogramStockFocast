@@ -1,4 +1,4 @@
-package five_day_stock_forcast;
+package five_stock_forcast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import library.SQLiteRowStockDataDaoClass;
 import library.StockCandleClass;
 import library.SystemVariableInterface;
 
-public class MainForcastFrom5DayDataClass implements
+public class MainForcastFrom5StockDataClass implements
 		SystemVariableInterface {
 
 	public static void main(String[] args) {
@@ -46,8 +46,8 @@ public class MainForcastFrom5DayDataClass implements
 			mrData[i][OneDayDataClass.TRADING_VOLUME] = (float) 100
 					* (candleList.get(i + 1).getTradingVolume() - candleList.get(i).getTradingVolume())
 					/ candleList.get(i).getTradingVolume();
-			
-			
+
+
 
 		}
 
@@ -60,26 +60,26 @@ public class MainForcastFrom5DayDataClass implements
 					fiveDayData[i].dailyData[j].preMR[k] = mrData[i + j][k];
 				}
 			}
-			
+
 			fiveDayData[i].sufClosingMR = mrData[i+5][OneDayDataClass.CLOSING];
 		}
 
 		LearningFiveDayDataClass x = new LearningFiveDayDataClass();
 		LogCsvClass log = new LogCsvClass("1");
 		List<String> logColumn = new ArrayList<String>();
-		
+
 		String[] dn = new String[5];
 		dn [0] = "open";
 		dn [1] = "low";
 		dn [2] = "high";
 		dn [3] = "closing";
 		dn [4] = "trading_volume";
-		
+
 		for(int i=0; i < NUM_OF_DAY_IN_STOCK_DATA; i++){
 			for(int j=0; j < 5; j++){
 					logColumn.add("day" + i + "_" + dn[j]);
 			}
-			
+
 			for(int j=0; j < 5; j++){
 				logColumn.add("day" + i + "_" + dn[j] + "_unit");
 			}
@@ -91,7 +91,7 @@ public class MainForcastFrom5DayDataClass implements
 		logColumn.add("distanceSum");
 		logColumn.add("resultClosing");
 		logColumn.add("profit");
-		
+
 
 		log.set(logColumn);
 
@@ -101,7 +101,7 @@ public class MainForcastFrom5DayDataClass implements
 
 			if(i > 30){
 
-				FiveDayResultClass result = x.getCalcResult(fiveDayData[i+1]);
+				FiveStockResultClass result = x.getCalcResult(fiveDayData[i+1]);
 
 				float profit = 0;
 				if(0 < result.mean){
@@ -110,18 +110,18 @@ public class MainForcastFrom5DayDataClass implements
 				else if(result.mean < 0){
 					profit = -fiveDayData[i+1].sufClosingMR;
 				}
-				
+
 				List<String> logStrList = new ArrayList<String>();
 				for(int j=0; j < NUM_OF_DAY_IN_STOCK_DATA; j++){
 					for(int k=0; k < 5; k++){
 							logStrList.add("" + fiveDayData[i].dailyData[j].preMR[k]);
 					}
-					
+
 					for(int k=0; k < 5; k++){
 						logStrList.add("" + result.unit[j][k]);
 					}
 				}
-				
+
 				logStrList.add("" + result.mean);
 				logStrList.add("" + result.std);
 				logStrList.add("" + result.influenceDist);
@@ -129,9 +129,9 @@ public class MainForcastFrom5DayDataClass implements
 				logStrList.add("" + result.distanceSum);
 				logStrList.add("" + fiveDayData[i+1].sufClosingMR);
 				logStrList.add("" + profit);
-				
+
 				log.set(logStrList);
-				
+
 			}
 
 			if(i % 100 == 0) System.out.println(i + "/" + fiveDayData.length + " progressed");
