@@ -6,7 +6,7 @@ public class FiveStockResultClass {
 	public int n;
 	public int distanceSum;
 	public int influenceDist;
-	public double unit[][];
+	public double unit[][][];
 
 	public FiveStockResultClass(){
 		mean = 0;

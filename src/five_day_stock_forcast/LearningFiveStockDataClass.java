@@ -56,8 +56,8 @@ public class LearningFiveDayDataClass implements SystemVariableInterface {
 
 		for (int i = 0; i < pointer[0][0].size(); i++) {
 
-			if (influenceDist > pointer[0][0].get(i).distance) {
-				int weight = influenceDist - pointer[0][0].get(i).distance;
+			if (influenceDist > pointer[0][0].get(i).dailyData[0].distance) {
+				int weight = influenceDist - pointer[0][0].get(i).dailyData[0].distance;
 				wSum += pointer[0][0].get(i).sufClosingMR * weight;
 				result.distanceSum += weight;
 				result.n++;
@@ -70,8 +70,8 @@ public class LearningFiveDayDataClass implements SystemVariableInterface {
 		double gapD2Sum = 0;
 
 		for (int i = 0; i < pointer[0][0].size(); i++) {
-			if (influenceDist > pointer[0][0].get(i).distance) {
-				final int weight = influenceDist - pointer[0][0].get(i).distance;
+			if (influenceDist > pointer[0][0].get(i).dailyData[0].distance) {
+				final int weight = influenceDist - pointer[0][0].get(i).dailyData[0].distance;
 				final double gap = pointer[0][0].get(i).sufClosingMR - result.mean;
 				gapD2Sum += gap * gap * weight;
 
@@ -94,7 +94,7 @@ public class LearningFiveDayDataClass implements SystemVariableInterface {
 			influenceDist += 1;
 			int n = 0;
 			for (int i = 0; i < pointer[0][0].size(); i++) {
-				if (influenceDist > pointer[0][0].get(i).distance)
+				if (influenceDist > pointer[0][0].get(i).dailyData[0].distance)
 					n++;
 			}
 
@@ -134,7 +134,7 @@ public class LearningFiveDayDataClass implements SystemVariableInterface {
 			unit[MRindex[0]][MRindex[1]] = getStdWhole(MRindex) / 5;
 			for (int i = 0; i < pointer.size(); i++) {
 
-				pointer.get(i).distance += (int) (Math.abs(priceMovements
+				pointer.get(i).dailyData[0].distance += (int) (Math.abs(priceMovements
 						- pointer.get(i).dailyData[MRindex[0]].preMR[MRindex[1]]) / unit[MRindex[0]][MRindex[1]]);
 
 			}
@@ -143,8 +143,8 @@ public class LearningFiveDayDataClass implements SystemVariableInterface {
 
 		public void resetDist() {
 			for (int i = 0; i < pointer.size(); i++) {
-				pointer.get(i).inDist = true;
-				pointer.get(i).distance = 0;
+				pointer.get(i).dailyData[0].inDist = true;
+				pointer.get(i).dailyData[0].distance = 0;
 			}
 
 		}
